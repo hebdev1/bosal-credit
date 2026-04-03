@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tipa Fintech — Coopérative Bosal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#070B14;--bg2:#0C1220;--bg3:#111827;--bg4:#1C2A3A;
+  --sur:rgba(255,255,255,.04);--sur2:rgba(255,255,255,.07);
+  --bd:rgba(255,255,255,.07);--bd2:rgba(255,255,255,.13);
+  --gold:#F5A623;--gold2:#E8920F;--goldt:rgba(245,166,35,.12);--goldg:rgba(245,166,35,.08);
+  --teal:#00D4C8;--tealt:rgba(0,212,200,.1);
+  --pur:#7C6FFF;--purt:rgba(124,111,255,.1);
+  --blue:#3B82F6;--bluet:rgba(59,130,246,.1);
+  --red:#F25F5C;--redt:rgba(242,95,92,.1);
+  --green:#10B981;--grnt:rgba(16,185,129,.1);
+  --t1:#F0F4FF;--t2:#8B9FC0;--t3:#4A5A74;
+  --f:'Plus Jakarta Sans',sans-serif;--fm:'Space Mono',monospace;
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--f);background:var(--bg);color:var(--t1);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+ul{list-style:none}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  transition:background .3s,border-color .3s,backdrop-filter .3s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(7,11,20,.9);backdrop-filter:blur(20px);border-color:var(--bd)}
+.nav-i{max-width:1200px;margin:0 auto;padding:0 28px;height:68px;display:flex;align-items:center;gap:32px}
+.logo{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;color:var(--t1);flex-shrink:0}
+.logo-m{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;color:var(--bg);box-shadow:0 4px 16px rgba(245,166,35,.4)}
+.logo-m svg{width:18px;height:18px}
+.logo strong{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:28px;margin-left:auto}
+.nav-links a{font-size:14px;color:var(--t2);transition:color .2s}
+.nav-links a:hover{color:var(--t1)}
+.nav-acts{display:flex;align-items:center;gap:10px}
+.btn-nav-o{padding:8px 18px;border-radius:8px;border:1px solid var(--bd2);color:var(--t2);font-family:var(--f);font-size:13px;font-weight:500;transition:all .2s;background:transparent}
+.btn-nav-o:hover{color:var(--t1);border-color:rgba(255,255,255,.22);background:var(--sur)}
+.btn-nav-p{padding:8px 18px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);font-family:var(--f);font-size:13px;font-weight:700;box-shadow:0 3px 14px rgba(245,166,35,.35);transition:all .2s}
+.btn-nav-p:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(245,166,35,.48)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px;margin-left:auto}
+.bl{width:22px;height:1.5px;background:var(--t2);border-radius:2px;transition:all .25s}
+.drawer{display:none;flex-direction:column;background:rgba(7,11,20,.98);backdrop-filter:blur(20px);border-top:1px solid var(--bd);padding:12px 28px 24px}
+.drawer a{padding:12px 0;font-size:15px;color:var(--t2);border-bottom:1px solid var(--bd);transition:color .2s}
+.drawer a:hover{color:var(--t1)}
+.drawer .d-cta{margin-top:12px;padding:13px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);text-align:center;border-radius:10px;font-weight:700;border:none}
+nav.open .drawer{display:flex}
+nav.open .bl:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+nav.open .bl:nth-child(2){opacity:0}
+nav.open .bl:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+.h-bg{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(90px)}
+.g1{width:700px;height:700px;background:radial-gradient(circle,rgba(245,166,35,.15),transparent 65%);top:-250px;left:-200px}
+.g2{width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,200,.1),transparent 65%);top:100px;right:-200px}
+.g3{width:400px;height:400px;background:radial-gradient(circle,rgba(124,111,255,.08),transparent 65%);bottom:-100px;left:35%}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:54px 54px;mask-image:radial-gradient(ellipse 90% 65% at 50% 30%,black 20%,transparent 100%)}
+.hero>.wrap{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1.05fr;gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:30px;border:1px solid rgba(245,166,35,.28);background:rgba(245,166,35,.08);font-size:13px;font-weight:500;color:var(--gold);margin-bottom:26px;animation:fu .5s both}
+.pdot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px var(--gold);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+h1{font-size:clamp(36px,5.5vw,66px);font-weight:800;line-height:1.06;letter-spacing:-.035em;color:var(--t1);margin-bottom:20px;animation:fu .5s .1s both}
+.gtxt{background:linear-gradient(135deg,var(--gold) 0%,#FFD880 50%,var(--teal) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-p{font-size:16px;color:var(--t2);line-height:1.78;max-width:460px;margin-bottom:34px;animation:fu .5s .2s both}
+.h-btns{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:32px;animation:fu .5s .3s both}
+.btn-hero{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:11px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--bg);font-family:var(--f);font-size:15px;font-weight:700;box-shadow:0 6px 24px rgba(245,166,35,.38);transition:all .25s}
+.btn-hero:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(245,166,35,.52)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:11px;border:1px solid var(--bd2);color:var(--t2);font-family:var(--f);font-size:15px;font-weight:500;background:var(--sur);transition:all .25s}
+.btn-ghost:hover{color:var(--t1);border-color:rgba(255,255,255,.2);background:var(--sur2)}
+.trust{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--t3);animation:fu .5s .4s both}
+.avs{display:flex}
+.av{width:26px;height:26px;border-radius:50%;border:2px solid var(--bg);margin-left:-6px;opacity:.85}
+.av:first-child{margin-left:0}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── DASHBOARD MOCKUP ── */
+.dash-wrap{position:relative;animation:fu .7s .25s both}
+.dash-glow{position:absolute;width:100%;height:50%;background:radial-gradient(ellipse,rgba(245,166,35,.12),transparent 70%);bottom:-5%;pointer-events:none}
+.dash{background:var(--bg2);border:1px solid var(--bd2);border-radius:18px;overflow:hidden;box-shadow:0 28px 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.04)}
+.d-bar{height:38px;background:var(--bg3);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:6px;padding:0 14px}
+.dot{width:11px;height:11px;border-radius:50%}
+.dot.r{background:#FF5F57}.dot.y{background:#FEBC2E}.dot.g{background:#28C840}
+.url{margin-left:12px;flex:1;background:var(--sur);border:1px solid var(--bd);border-radius:6px;height:22px;display:flex;align-items:center;padding:0 10px;font-size:11px;color:var(--t3);font-family:var(--fm)}
+.d-body{display:flex;min-height:340px}
+.d-side{width:160px;background:rgba(0,0,0,.15);border-right:1px solid var(--bd);padding:14px;flex-shrink:0}
+.d-logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));margin-bottom:18px}
+.d-nav-item{height:28px;border-radius:6px;background:var(--sur);margin-bottom:5px}
+.d-nav-item.act{background:rgba(245,166,35,.18);width:80%}
+.d-main{flex:1;padding:14px;display:flex;flex-direction:column;gap:12px}
+.d-title{font-size:13px;font-weight:700;color:var(--t1);margin-bottom:2px}
+.d-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dsc{border-radius:10px;padding:10px;border:1px solid var(--bd)}
+.dsc.s1{background:linear-gradient(135deg,rgba(245,166,35,.12),transparent);border-color:rgba(245,166,35,.2)}
+.dsc.s2{background:linear-gradient(135deg,rgba(0,212,200,.1),transparent);border-color:rgba(0,212,200,.2)}
+.dsc.s3{background:linear-gradient(135deg,rgba(16,185,129,.08),transparent);border-color:rgba(16,185,129,.2)}
+.dsc.s4{background:linear-gradient(135deg,rgba(124,111,255,.1),transparent);border-color:rgba(124,111,255,.2)}
+.dsc-l{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.dsc-v{font-size:13px;font-weight:700;color:var(--t1);font-family:var(--fm)}
+.dsc-s{font-size:9px;margin-top:2px}
+.dsc-s.up{color:var(--green)}.dsc-s.w{color:var(--t3)}
+.d-grid{display:grid;grid-template-columns:1fr auto;gap:10px;flex:1}
+.d-tbl{background:var(--sur);border-radius:10px;overflow:hidden;border:1px solid var(--bd)}
+.d-th{height:26px;background:var(--sur2);border-bottom:1px solid var(--bd);display:flex;align-items:center;gap:10px;padding:0 10px}
+.th-dot{width:7px;height:7px;border-radius:50%}
+.th-line{height:5px;border-radius:3px;background:var(--sur2);width:60%}
+.d-tr{height:26px;border-bottom:1px solid rgba(255,255,255,.03);padding:0 10px;display:flex;align-items:center;gap:8px}
+.tr-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.tr-line{height:5px;border-radius:3px;background:var(--sur);flex:1}
+.tr-amt{font-size:10px;font-family:var(--fm);font-weight:700}
+.tr-amt.pos{color:var(--green)}.tr-amt.neg{color:var(--red)}
+.d-chart{width:90px;background:var(--sur);border-radius:10px;border:1px solid var(--bd);display:flex;align-items:flex-end;gap:4px;padding:10px}
+.cb{flex:1;border-radius:3px 3px 0 0}
+.cb.a{background:rgba(245,166,35,.3)}.cb.a.hi{background:rgba(245,166,35,.7);box-shadow:0 -3px 8px rgba(245,166,35,.35)}
+/* Float cards */
+.fc{position:absolute;background:var(--bg3);border:1px solid var(--bd2);border-radius:13px;padding:11px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 14px 40px rgba(0,0,0,.4);white-space:nowrap}
+.fc1{bottom:24px;left:-44px;animation:fl1 3.8s ease-in-out infinite}
+.fc2{top:36px;right:-36px;animation:fl2 3.8s 1.2s ease-in-out infinite}
+@keyframes fl1{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes fl2{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+.fc-ico{font-size:18px}
+.fc-l{font-size:9px;color:var(--t3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:2px}
+.fc-v{font-size:15px;font-weight:700;color:var(--t1);font-family:var(--fm)}
+
+/* ── STATS BAR ── */
+.sbar{background:var(--bg2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:32px 0}
+.sbar-g{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px}
+.sb-it{text-align:center;flex:1}
+.sb-n{font-family:var(--fm);font-size:18px;font-weight:700;color:var(--gold);margin-bottom:4px}
+.sb-l{font-size:12px;color:var(--t3)}
+.sb-sep{width:1px;height:40px;background:var(--bd);flex-shrink:0}
+
+/* ── SECTION HEADERS ── */
+.sh{text-align:center;margin-bottom:56px}
+.stag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:var(--goldt);padding:5px 14px;border-radius:20px;border:1px solid rgba(245,166,35,.22);margin-bottom:14px}
+.sh2{font-size:clamp(28px,4.5vw,48px);font-weight:800;line-height:1.1;letter-spacing:-.03em;color:var(--t1);margin-bottom:12px}
+.sp{font-size:15px;color:var(--t2);max-width:480px;margin:0 auto}
+
+/* ── FEATURES ── */
+.feats{padding:110px 0}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.fc-card{background:var(--bg2);border:1px solid var(--bd);border-radius:18px;padding:26px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s,box-shadow .3s}
+.fc-card:hover{border-color:var(--bd2);transform:translateY(-4px);box-shadow:0 18px 50px rgba(0,0,0,.3)}
+.fc-card.big{grid-column:span 2}
+.acc{position:absolute;width:180px;height:180px;border-radius:50%;filter:blur(55px);opacity:.28;top:-50px;right:-50px;pointer-events:none}
+.acc.gd{background:var(--gold)}.acc.tl{background:var(--teal)}.acc.pu{background:var(--pur)}.acc.bl{background:var(--blue)}.acc.rd{background:var(--red)}
+.fch{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.fci{width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center}
+.fci.gd{background:var(--goldt);color:var(--gold);border:1px solid rgba(245,166,35,.22)}
+.fci.tl{background:var(--tealt);color:var(--teal);border:1px solid rgba(0,212,200,.22)}
+.fci.pu{background:var(--purt);color:var(--pur);border:1px solid rgba(124,111,255,.22)}
+.fci.bl{background:var(--bluet);color:var(--blue);border:1px solid rgba(59,130,246,.22)}
+.fci.rd{background:var(--redt);color:var(--red);border:1px solid rgba(242,95,92,.22)}
+.fci svg{width:20px;height:20px}
+.ftag{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px;background:var(--goldt);color:var(--gold);border:1px solid rgba(245,166,35,.22)}
+.ftag.bl{background:var(--bluet);color:var(--blue);border-color:rgba(59,130,246,.22)}
+.fc-card h3{font-size:17px;font-weight:700;color:var(--t1);margin-bottom:7px;letter-spacing:-.02em}
+.fc-card p{font-size:13px;color:var(--t2);line-height:1.72;margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.chip{font-size:11px;color:var(--t3);padding:3px 10px;border:1px solid var(--bd);border-radius:20px;background:var(--sur)}
+/* Mini visuals */
+.mrows{display:flex;flex-direction:column;gap:7px}
+.mrow{display:flex;align-items:center;gap:9px;padding:8px;background:var(--sur);border-radius:8px;border:1px solid var(--bd)}
+.mav{width:26px;height:26px;border-radius:50%;flex-shrink:0}
+.mls{flex:1;display:flex;flex-direction:column;gap:4px}
+.mls div{height:5px;border-radius:3px;background:var(--sur2)}
+.mls div:last-child{width:55%}
+.mbdg{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:500}
+.mbdg.act{background:var(--grnt);color:var(--green)}
+.mbdg.sus{background:var(--redt);color:var(--red)}
+.prog{display:flex;flex-direction:column;gap:9px}
+.pr{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--t3)}
+.pb{flex:1;height:5px;background:var(--sur);border-radius:3px;overflow:hidden}
+.pb div{height:100%;border-radius:3px}
+.lpills{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+.lp{display:flex;align-items:center;gap:6px;padding:6px 11px;border-radius:8px;background:var(--sur);border:1px solid var(--bd);font-size:12px;color:var(--t2)}
+.lp strong{color:var(--t1);margin-left:3px}
+.lpd{width:6px;height:6px;border-radius:50%}
+.lpd.p{background:var(--gold)}.lpd.a{background:var(--green)}.lpd.c{background:var(--teal)}
+.rvis{display:flex;flex-direction:column;gap:7px;margin-top:6px}
+.rr{display:flex;align-items:center;gap:9px;padding:9px 11px;background:var(--sur);border:1px solid var(--bd);border-radius:8px}
+.rpair{font-size:12px;color:var(--t2);flex:1;font-family:var(--fm)}
+.rrate{font-size:13px;font-weight:700;color:var(--t1);font-family:var(--fm)}
+.rch{font-size:11px;font-weight:600}
+.rch.up{color:var(--green)}.rch.dn{color:var(--red)}
+
+/* ── ROLES ── */
+.roles{padding:110px 0;background:var(--bg2);border-top:1px solid var(--bd);border-bottom:1px solid var(--bd)}
+.roles-g{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.rc{background:var(--bg);border:1px solid var(--bd);border-radius:18px;padding:30px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
+.rc:hover{transform:translateY(-4px)}
+.rc.feat{border-color:rgba(0,212,200,.25);background:linear-gradient(160deg,rgba(0,212,200,.05),var(--bg));transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.rc.feat:hover{transform:translateY(-12px)}
+.rgl{position:absolute;width:240px;height:240px;border-radius:50%;filter:blur(65px);opacity:.14;top:-80px;right:-80px;pointer-events:none}
+.rgl.gd{background:var(--gold)}.rgl.tl{background:var(--teal)}.rgl.pu{background:var(--pur)}
+.rh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.rio{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.rio.gd{background:var(--goldt);color:var(--gold);border:1px solid rgba(245,166,35,.22)}
+.rio.tl{background:var(--tealt);color:var(--teal);border:1px solid rgba(0,212,200,.22)}
+.rio.pu{background:var(--purt);color:var(--pur);border:1px solid rgba(124,111,255,.22)}
+.rio svg{width:18px;height:18px}
+.rbdg{font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:20px}
+.rbdg.gd{background:var(--goldt);color:var(--gold);border:1px solid rgba(245,166,35,.22)}
+.rbdg.tl{background:var(--tealt);color:var(--teal);border:1px solid rgba(0,212,200,.22)}
+.rbdg.pu{background:var(--purt);color:var(--pur);border:1px solid rgba(124,111,255,.22)}
+.rc h3{font-size:19px;font-weight:700;color:var(--t1);margin-bottom:16px;letter-spacing:-.02em}
+.rl{display:flex;flex-direction:column;gap:9px}
+.rl li{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--t2)}
+.rl li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0;font-size:11px;margin-top:2px}
+
+/* ── CTA ── */
+.cta{padding:100px 0;position:relative;overflow:hidden}
+.cta-amb{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(245,166,35,.08),transparent 70%);pointer-events:none}
+.cta-box{background:var(--bg2);border:1px solid rgba(245,166,35,.18);border-radius:22px;padding:56px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:32px;position:relative;overflow:hidden}
+.cta-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(245,166,35,.45),transparent)}
+.cta-box h2{font-size:clamp(24px,4vw,40px);font-weight:800;color:var(--t1);letter-spacing:-.03em;line-height:1.15;margin-bottom:8px}
+.cta-box p{font-size:15px;color:var(--t2)}
+.cta-acts{display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0}
+
+/* ── ABOUT ── */
+.about{padding:110px 0;border-top:1px solid var(--bd)}
+.about-g{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.al p{font-size:15px;color:var(--t2);line-height:1.8;margin-bottom:14px}
+.ar{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.vc{display:flex;gap:12px;padding:18px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;transition:border-color .25s,transform .25s}
+.vc:hover{border-color:var(--bd2);transform:translateY(-2px)}
+.vci{font-size:18px;width:40px;height:40px;border-radius:10px;background:var(--goldt);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.vc h4{font-size:13px;font-weight:600;color:var(--t1);margin-bottom:3px}
+.vc p{font-size:12px;color:var(--t3);line-height:1.55}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--bd);padding:52px 0 32px;background:var(--bg2)}
+.fg{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.fb p{font-size:13px;color:var(--t3);margin-top:8px;line-height:1.6}
+.fcol{display:flex;flex-direction:column;gap:10px}
+.fcol h4{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+.fcol a{font-size:13px;color:var(--t2);transition:color .2s}
+.fcol a:hover{color:var(--t1)}
+.fbot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;padding-top:24px;border-top:1px solid var(--bd);font-size:12px;color:var(--t3)}
+
+/* ── REVEAL ── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.rv.in{opacity:1;transform:translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px){
+  .hero>.wrap{grid-template-columns:1fr;text-align:center}
+  .hero-p,.h-btns,.trust{max-width:100%;justify-content:center}
+  .dash-wrap{max-width:580px;margin:0 auto}
+  .fc1,.fc2{display:none}
+  .feat-grid{grid-template-columns:1fr 1fr}
+  .fc-card.big{grid-column:span 2}
+  .roles-g{grid-template-columns:1fr}
+  .rc.feat{transform:none}.rc.feat:hover{transform:translateY(-4px)}
+  .about-g{grid-template-columns:1fr;gap:48px}
+}
+@media(max-width:768px){
+  .nav-links,.nav-acts{display:none}
+  .burger{display:flex}
+  .feat-grid{grid-template-columns:1fr}
+  .fc-card.big{grid-column:span 1}
+  .ar{grid-template-columns:1fr}
+  .cta-box{padding:36px 24px;flex-direction:column;text-align:center}
+  .fg{grid-template-columns:1fr 1fr}
+  .sb-sep{display:none}
+  .sbar-g{justify-content:center;gap:24px}
+  .d-stats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .wrap{padding:0 18px}
+  .fg{grid-template-columns:1fr}
+  .h-btns{flex-direction:column}
+  .btn-hero,.btn-ghost{width:100%;justify-content:center}
+  .cta-acts{flex-direction:column;width:100%}
+  .cta-acts .btn-hero,.cta-acts .btn-ghost{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-i">
+    <a href="index.html" class="logo">
+      <div class="logo-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+      <span>Tipa<strong>Fintech</strong></span>
+    </a>
+    <div class="nav-links">
+      <a href="#features">Fonctionnalités</a>
+      <a href="#roles">Rôles</a>
+      <a href="#about">À propos</a>
+    </div>
+    <div class="nav-acts">
+      <a href="pages/signin.html" class="btn-nav-o">Connexion</a>
+      <a href="pages/signup.html" class="btn-nav-p">Commencer →</a>
+    </div>
+    <button class="burger" id="burger"><div class="bl"></div><div class="bl"></div><div class="bl"></div></button>
+  </div>
+  <div class="drawer" id="drawer">
+    <a href="#features">Fonctionnalités</a>
+    <a href="#roles">Rôles & Accès</a>
+    <a href="#about">À propos</a>
+    <a href="pages/signin.html">Connexion</a>
+    <a href="pages/signup.html" class="d-cta">Créer un compte →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="h-bg">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+    <div class="glow g3"></div>
+    <div class="h-grid"></div>
+  </div>
+  <div class="wrap">
+    <!-- Content -->
+    <div>
+      <div class="pill"><span class="pdot"></span>🇭🇹 Plateforme coopérative haïtienne</div>
+      <h1>Gérez votre<br><span class="gtxt">coopérative</span><br>intelligemment</h1>
+      <p class="hero-p">Membres, épargne, prêts, bureau de change et clôtures journalières — tout en une seule plateforme sécurisée et conçue pour Haïti.</p>
+      <div class="h-btns">
+        <a href="pages/signup.html" class="btn-hero">Commencer gratuitement</a>
+        <a href="#features" class="btn-ghost">Voir les fonctionnalités</a>
+      </div>
+      <div class="trust">
+        <div class="avs">
+          <div class="av" style="background:#F5A623"></div>
+          <div class="av" style="background:#0ECFC0"></div>
+          <div class="av" style="background:#7C6FFF"></div>
+        </div>
+        <span>Sécurisé · Multi-devises · Temps réel</span>
+      </div>
+    </div>
+
+    <!-- Dashboard mockup -->
+    <div class="dash-wrap">
+      <div class="dash-glow"></div>
+      <div class="dash">
+        <div class="d-bar">
+          <div class="dot r"></div><div class="dot y"></div><div class="dot g"></div>
+          <div class="url">app.tipafintech.ht/dashboard</div>
+        </div>
+        <div class="d-body">
+          <div class="d-side">
+            <div class="d-logo"></div>
+            <div class="d-nav-item act"></div>
+            <div class="d-nav-item"></div>
+            <div class="d-nav-item"></div>
+            <div class="d-nav-item"></div>
+            <div class="d-nav-item"></div>
+          </div>
+          <div class="d-main">
+            <div class="d-title">Tableau de bord — Coopérative Bosal</div>
+            <div class="d-stats">
+              <div class="dsc s1"><div class="dsc-l">Dépôts</div><div class="dsc-v">168k</div><div class="dsc-s up">+12.4%</div></div>
+              <div class="dsc s2"><div class="dsc-l">Membres</div><div class="dsc-v">247</div><div class="dsc-s up">+3 ce mois</div></div>
+              <div class="dsc s3"><div class="dsc-l">Prêts actifs</div><div class="dsc-v">42</div><div class="dsc-s w">2 en attente</div></div>
+              <div class="dsc s4"><div class="dsc-l">Coffre</div><div class="dsc-v">168k</div><div class="dsc-s up">HTG</div></div>
+            </div>
+            <div class="d-grid">
+              <div class="d-tbl">
+                <div class="d-th"><div class="th-dot" style="background:var(--t3)"></div><div class="th-line"></div></div>
+                <div class="d-tr"><div class="tr-dot" style="background:var(--green)"></div><div class="tr-line"></div><div class="tr-amt pos">+5,000</div></div>
+                <div class="d-tr"><div class="tr-dot" style="background:var(--red)"></div><div class="tr-line"></div><div class="tr-amt neg">-2,500</div></div>
+                <div class="d-tr"><div class="tr-dot" style="background:var(--teal)"></div><div class="tr-line"></div><div class="tr-amt pos">50 USD</div></div>
+                <div class="d-tr"><div class="tr-dot" style="background:var(--green)"></div><div class="tr-line"></div><div class="tr-amt pos">+3,000</div></div>
+              </div>
+              <div class="d-chart">
+                <div class="cb a" style="height:50%"></div>
+                <div class="cb a" style="height:72%"></div>
+                <div class="cb a" style="height:45%"></div>
+                <div class="cb a hi" style="height:90%"></div>
+                <div class="cb a" style="height:62%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Floating -->
+      <div class="fc fc1"><div class="fc-ico">💱</div><div><div class="fc-l">USD → HTG</div><div class="fc-v">133.50</div></div></div>
+      <div class="fc fc2"><div class="fc-ico">🏦</div><div><div class="fc-l">Coffre-fort</div><div class="fc-v">168k HTG</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="sbar">
+  <div class="wrap">
+    <div class="sbar-g">
+      <div class="sb-it"><div class="sb-n">100%</div><div class="sb-l">Chiffrement</div></div>
+      <div class="sb-sep"></div>
+      <div class="sb-it"><div class="sb-n">HTG · USD · CAD · DOP</div><div class="sb-l">Multi-devises</div></div>
+      <div class="sb-sep"></div>
+      <div class="sb-it"><div class="sb-n">Temps réel</div><div class="sb-l">Synchronisation instantanée</div></div>
+      <div class="sb-sep"></div>
+      <div class="sb-it"><div class="sb-n">3 rôles</div><div class="sb-l">Contrôle d'accès granulaire</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section class="feats" id="features">
+  <div class="wrap">
+    <div class="sh">
+      <div class="stag">Fonctionnalités</div>
+      <h2 class="sh2">Tout pour gérer<br>votre coopérative</h2>
+      <p class="sp">Une suite complète pensée pour les opérations quotidiennes des coopératives haïtiennes.</p>
+    </div>
+    <div class="feat-grid">
+
+      <!-- Big: Membres -->
+      <div class="fc-card big rv">
+        <div class="acc gd"></div>
+        <div class="fch">
+          <div class="fci gd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a7 7 0 0 1 14 0v2"/><path d="M19 8l2 2 4-4"/></svg></div>
+          <div class="ftag">Core</div>
+        </div>
+        <h3>Gestion des membres</h3>
+        <p>Fiches complètes avec pièces d'identité, historique, comptes associés, prêts et parts sociales. Recherche instantanée parmi tous vos membres.</p>
+        <div class="chips"><span class="chip">CIN · NIF · Passeport</span><span class="chip">Recherche rapide</span><span class="chip">Historique complet</span></div>
+        <div class="mrows">
+          <div class="mrow"><div class="mav" style="background:#F5A623;opacity:.8"></div><div class="mls"><div></div><div></div></div><span class="mbdg act">Actif</span></div>
+          <div class="mrow"><div class="mav" style="background:#00D4C8;opacity:.8"></div><div class="mls"><div></div><div></div></div><span class="mbdg act">Actif</span></div>
+          <div class="mrow"><div class="mav" style="background:#7C6FFF;opacity:.8"></div><div class="mls"><div></div><div></div></div><span class="mbdg sus">Suspendu</span></div>
+        </div>
+      </div>
+
+      <!-- Comptes -->
+      <div class="fc-card rv" style="transition-delay:.1s">
+        <div class="acc tl"></div>
+        <div class="fch"><div class="fci tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div></div>
+        <h3>Comptes & Épargne</h3>
+        <p>Épargne, dépôts à terme et wallets. Dépôts, retraits et transferts avec vérification du solde en temps réel.</p>
+        <div class="prog">
+          <div class="pr"><span>Épargne</span><div class="pb"><div style="width:72%;background:var(--teal)"></div></div><span>72%</span></div>
+          <div class="pr"><span>Dépôts</span><div class="pb"><div style="width:48%;background:var(--gold)"></div></div><span>48%</span></div>
+          <div class="pr"><span>Wallets</span><div class="pb"><div style="width:30%;background:var(--pur)"></div></div><span>30%</span></div>
+        </div>
+      </div>
+
+      <!-- Prêts -->
+      <div class="fc-card rv" style="transition-delay:.2s">
+        <div class="acc pu"></div>
+        <div class="fch"><div class="fci pu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div></div>
+        <h3>Prêts & Remboursements</h3>
+        <p>Soumission, approbation, échéancier automatique et suivi complet des remboursements par prêt.</p>
+        <div class="lpills">
+          <div class="lp"><div class="lpd p"></div><span>En attente</span><strong>2</strong></div>
+          <div class="lp"><div class="lpd a"></div><span>Actifs</span><strong>42</strong></div>
+          <div class="lp"><div class="lpd c"></div><span>Soldés</span><strong>18</strong></div>
+        </div>
+      </div>
+
+      <!-- Big: Change -->
+      <div class="fc-card big rv" style="transition-delay:.15s">
+        <div class="acc bl"></div>
+        <div class="fch">
+          <div class="fci bl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 7h12M8 7l4-4M8 7l4 4M16 17H4m12 0-4-4m4 4-4 4"/></svg></div>
+          <div class="ftag bl">Multi-devises</div>
+        </div>
+        <h3>Bureau de Change</h3>
+        <p>Opérations USD, CAD, DOP ↔ HTG. Gestion des taux, historique journalier, statistiques et tickets imprimables pour chaque transaction.</p>
+        <div class="chips"><span class="chip">USD · CAD · DOP · HTG</span><span class="chip">Tickets imprimables</span><span class="chip">Historique taux</span></div>
+        <div class="rvis">
+          <div class="rr"><span class="rpair">USD → HTG</span><span class="rrate">133.50</span><span class="rch up">+0.3%</span></div>
+          <div class="rr"><span class="rpair">CAD → HTG</span><span class="rrate">97.80</span><span class="rch up">+0.1%</span></div>
+          <div class="rr"><span class="rpair">DOP → HTG</span><span class="rrate">2.28</span><span class="rch dn">−0.2%</span></div>
+        </div>
+      </div>
+
+      <!-- Parts -->
+      <div class="fc-card rv" style="transition-delay:.3s">
+        <div class="acc gd"></div>
+        <div class="fch"><div class="fci gd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18M15 3v18"/></svg></div></div>
+        <h3>Parts Sociales</h3>
+        <p>Attribution de parts, suivi du capital coopératif et distribution des dividendes avec calcul automatique des taxes.</p>
+      </div>
+
+      <!-- Clôture -->
+      <div class="fc-card rv" style="transition-delay:.35s">
+        <div class="acc rd"></div>
+        <div class="fch"><div class="fci rd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div></div>
+        <h3>Clôture Journalière</h3>
+        <p>Rapport détaillé complet. Export CSV et PDF avec toutes les transactions. Coffre-fort en temps réel via trigger automatique.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ROLES -->
+<section class="roles" id="roles">
+  <div class="wrap">
+    <div class="sh">
+      <div class="stag">Accès & Sécurité</div>
+      <h2 class="sh2">Le bon accès pour<br>chaque agent</h2>
+    </div>
+    <div class="roles-g">
+      <div class="rc rv">
+        <div class="rgl gd"></div>
+        <div class="rh"><div class="rio gd"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="rbdg gd">Admin</div></div>
+        <h3>Administrateur</h3>
+        <ul class="rl"><li>Accès complet à toutes les fonctions</li><li>Gestion des agents et des rôles</li><li>Configuration des taux de change</li><li>Validation et clôture journalière</li><li>Rapports et exports complets</li></ul>
+      </div>
+      <div class="rc feat rv" style="transition-delay:.1s">
+        <div class="rgl tl"></div>
+        <div class="rh"><div class="rio tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="5"/><path d="M3 21v-1a9 9 0 0 1 18 0v1"/></svg></div><div class="rbdg tl">Manager</div></div>
+        <h3>Manager</h3>
+        <ul class="rl"><li>Approbation et rejet des prêts</li><li>Validation des transactions</li><li>Accès aux rapports détaillés</li><li>Gestion des membres</li><li>Clôture journalière</li></ul>
+      </div>
+      <div class="rc rv" style="transition-delay:.2s">
+        <div class="rgl pu"></div>
+        <div class="rh"><div class="rio pu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg></div><div class="rbdg pu">Caissier</div></div>
+        <h3>Caissier</h3>
+        <ul class="rl"><li>Dépôts, retraits et transferts</li><li>Opérations de change</li><li>Impression des tickets</li><li>Consultation des comptes</li><li>Enregistrement des remboursements</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta-amb"></div>
+  <div class="wrap">
+    <div class="cta-box rv">
+      <div>
+        <h2>Prêt à digitaliser<br>votre coopérative ?</h2>
+        <p>Rejoignez les coopératives qui font confiance à Tipa Fintech.</p>
+      </div>
+      <div class="cta-acts">
+        <a href="pages/signup.html" class="btn-hero">Créer un compte →</a>
+        <a href="pages/signin.html" class="btn-ghost">J'ai déjà un compte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="wrap">
+    <div class="about-g">
+      <div class="al rv">
+        <div class="stag" style="display:inline-block">À propos</div>
+        <h2 class="sh2" style="text-align:left;margin-top:12px">Construit pour<br>la réalité <span class="gtxt">haïtienne</span></h2>
+        <p>Tipa Fintech est né d'une constatation simple : les coopératives haïtiennes méritent des outils modernes adaptés à leur contexte — multi-devises, robustes et accessibles depuis n'importe quel appareil.</p>
+        <p>La plateforme gère nativement HTG, USD, CAD et DOP avec une interface pensée pour les agents de terrain.</p>
+        <a href="pages/signup.html" class="btn-hero" style="display:inline-flex;margin-top:24px">Commencer maintenant →</a>
+      </div>
+      <div class="ar rv" style="transition-delay:.15s">
+        <div class="vc"><div class="vci">🔒</div><div><h4>Sécurité d'abord</h4><p>Chiffrement bout en bout, RLS et audit complet de toutes les actions.</p></div></div>
+        <div class="vc"><div class="vci">📱</div><div><h4>100% Responsive</h4><p>Fonctionne sur ordinateur, tablette et mobile depuis n'importe quel navigateur.</p></div></div>
+        <div class="vc"><div class="vci">⚡</div><div><h4>Temps réel</h4><p>Données synchronisées instantanément entre tous les agents connectés.</p></div></div>
+        <div class="vc"><div class="vci">📊</div><div><h4>Rapports PDF & CSV</h4><p>Clôtures journalières exportables avec toutes les transactions détaillées.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fg">
+      <div class="fb">
+        <a href="index.html" class="logo"><div class="logo-m"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><span>Tipa<strong>Fintech</strong></span></a>
+        <p>La plateforme de gestion coopérative pour Haïti.<br>Port-au-Prince · +509 3700-0000</p>
+      </div>
+      <div class="fcol">
+        <h4>Produit</h4>
+        <a href="#features">Fonctionnalités</a>
+        <a href="#roles">Rôles & Accès</a>
+        <a href="pages/signin.html">Connexion</a>
+        <a href="pages/signup.html">Inscription</a>
+      </div>
+      <div class="fcol">
+        <h4>Coopérative</h4>
+        <a href="#about">À propos</a>
+        <a href="mailto:info@tipafintech.ht">Contact</a>
+      </div>
+    </div>
+    <div class="fbot">
+      <span>© 2025 Tipa Fintech — Coopérative Bosal. Tous droits réservés.</span>
+      <span>🇭🇹 Haïti</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// NAV scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30),{passive:true});
+
+// Burger
+const burger=document.getElementById('burger');
+burger?.addEventListener('click',()=>nav.classList.toggle('open'));
+document.querySelectorAll('.drawer a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+
+// Reveal on scroll
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');obs.unobserve(x.target)}}),{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+
+// Smooth anchors
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();nav.classList.remove('open');t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+</body>
+</html>
